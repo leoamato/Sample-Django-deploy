@@ -3,14 +3,13 @@ version: '3'
 services:
   web:
     build: ./mySampleProject
-    command: python manage.py runserver 0.0.0.0:8000
-    # command: gunicorn bookstore.wsgi:application --bind 0.0.0.0:8001
+    command: gunicorn mySampleProject.wsgi:application --bind 0.0.0.0:8001
     volumes:
       - ./mySampleProject:/code
-      # - static_volume:/code/staticfiles
+      - static_volume:/code/staticfiles
     ports:
-      - "8000:8000"
-    expose: [8000]
+      - "8001:8001"
+    expose: [8001]
     env_file:
       - ./.env
     depends_on:
@@ -23,6 +22,15 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: psqlpass123
       POSTGRES_DB: djangodb
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:8000
+    depends_on:
+      - web
+    volumes:
+      - static_volume:/code/staticfiles
 
 volumes:
   postgres_data:
+  static_volume:
