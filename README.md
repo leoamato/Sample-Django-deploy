@@ -12,8 +12,8 @@ This is a demo project that shows how to deploy a Django application using Docke
 1. Clone the Repository
 
 ```sh
-git clone https://github.com/your_username/django-docker-postgresql-demo.git
-cd django-docker-postgresql-demo
+git clone https://github.com/leoamato/Sample-Django-deploy.git
+cd Sample-Django-deploy
 ```
 
 2. Configure Environment Variables
